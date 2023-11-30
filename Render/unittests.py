@@ -17,5 +17,6 @@ class TestRenderMethods(unittest.TestCase):
         res = render.size_check("Render/SizeTest/500x500.png")
         self.assertTrue(res, "500x500 image should not return False")
 
+
 if __name__ == "__main__":
      unittest.main(verbosity=2)
