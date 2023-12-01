@@ -1,8 +1,8 @@
 # 2024oh-grp2
 
-Branch 1 (Image Processing) - Alfred/Brayden
+Team 1 (Image Processing) - Alfred/Brayden/Jayden
 
-Branch 2 (Image Rendering) - Yu Yang/Jayden
+Team 2 (everything else) - Yu Yang
 
 todo: refer to [notion](https://www.notion.so/klystron/Open-House-2024-6595f8685e6348a497347a6179844c28)
 
