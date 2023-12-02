@@ -1,10 +1,57 @@
-import requests
-from Render import render
+# imports
+import sys
+import argparse
 
-# program entry point
+def banner():
+    return """
+                                 __   _                    
+                                / _| | |                   
+   ___   __   __   ___   _ __  | |_  | |   ___   __      __
+  / _ \  \ \ / /  / _ \ | '__| |  _| | |  / _ \  \ \ /\ / /
+ | (_) |  \ V /  |  __/ | |    | |   | | | (_) |  \ V  V / 
+  \___/    \_/    \___| |_|    |_|   |_|  \___/    \_/\_/  
+                                                           
+                                                           
 
-def __main__():
-    URL_TO_IMAGE = input("Enter URL to image: ")
-    image = requests.get(URL_TO_IMAGE).content
+Credits:
+    Yu Yang
+    Jayden
+    Alfred
+    Brayden
+    """
 
-    # TO IMPLEMENT : resize image
+def parse_args():
+    parser = argparse.ArgumentParser(description="boioioioing")
+
+    parser.add_argument(
+        "-u",
+        "--url",
+        help="takes a url argument containing the image"
+    )
+
+    parser.add_argument(
+        "-p",
+        "--path",
+        help="specifies a path for the program to get image from"
+    )
+
+    parser.add_argument(
+        "-m",
+        "--mode",
+        help="specifies what effects to apply to the input image, or defaults to boioioing"
+    )
+
+    if len(sys.argv) == 1:
+        print(banner())
+        parser.print_help()
+        sys.exit(1)
+
+    args = parser.parse_args()
+    return args
+
+def main(): # program main entry point
+    args = parse_args()
+
+
+if __name__ == "__main__":
+    main()
