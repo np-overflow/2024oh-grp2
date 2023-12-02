@@ -4,17 +4,24 @@ import argparse
 
 def banner():
     return """
-    Overflow Open House Project!
+                                 __   _                    
+                                / _| | |                   
+   ___   __   __   ___   _ __  | |_  | |   ___   __      __
+  / _ \  \ \ / /  / _ \ | '__| |  _| | |  / _ \  \ \ /\ / /
+ | (_) |  \ V /  |  __/ | |    | |   | | | (_) |  \ V  V / 
+  \___/    \_/    \___| |_|    |_|   |_|  \___/    \_/\_/  
+                                                           
+                                                           
 
-    Credits:
-        Yu Yang
-        Jayden
-        Alfred
-        Brayden
+Credits:
+    Yu Yang
+    Jayden
+    Alfred
+    Brayden
     """
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Overflow Open House Project")
+    parser = argparse.ArgumentParser(description="boioioioing")
 
     parser.add_argument(
         "-u",

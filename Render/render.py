@@ -10,4 +10,4 @@ def size_check(path):
     img = cv2.imread(path)
     w, h, _ = img.shape
 
-    return w == h == 500
+    return w == h == 1000
