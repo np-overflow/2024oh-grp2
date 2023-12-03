@@ -4,9 +4,11 @@ import Transform.transform as transform
 
 import os
 import sys
+import time
+import imghdr
+import shutil
 import argparse
 import requests
-import imghdr
 
 from uuid import uuid4 as uuid
 
@@ -72,24 +74,38 @@ def get_image(url, save_path):
         
         image_format = imghdr.what(save_path)
         new_path = f"{save_path}.{image_format}"
-        os.rename(save_path, new_path)
 
+        os.rename(save_path, new_path)
     else:
         raise Exception("Cannot get image")
 
     return new_path
 
 def main(): # program main entry point
+    save_path = "./temp/"
+
+    if os.path.exists(save_path):
+        shutil.rmtree(save_path) # remove temp and its contents
+
     args = parse_args()
     mode = args.mode
-    save_path = "./temp/"
     rng = str(uuid())
+
+    os.mkdir(save_path)
 
     if args.path is not None:
         image_src = transform.resize_image(args.path)
     else:
         image_src = transform.resize_image(get_image(args.url, save_path+rng))
 
+    if mode == MODE_BOING:
+        image_paths = transform.boioioing(image_src)
+        while True:
+            for image in image_paths:
+                render.render_image(image)
+
+                time.sleep(1 / 24 * 4)
+                os.system('cls') # clear terminal
 
 if __name__ == "__main__":
     main()
