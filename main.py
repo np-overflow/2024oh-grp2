@@ -104,7 +104,7 @@ def main(): # program main entry point
             for image in image_paths:
                 render.render_image(image)
 
-                time.sleep(1 / 24 * 4)
+                time.sleep(1 / 5000)
                 os.system('cls') # clear terminal
 
 if __name__ == "__main__":
