@@ -101,10 +101,9 @@ def main(): # program main entry point
     if mode == MODE_BOING:
         image_paths = transform.boioioing(image_src)
         while True:
-            for image in image_paths:
-                render.render_image(image)
-
-                time.sleep(1 / 5000)
+            for i in range(0, len(image_paths), 8): # 8 is step :D
+                render.render_image(image_paths[i])
+                time.sleep(1 / 727)
                 os.system('cls') # clear terminal
 
 if __name__ == "__main__":
