@@ -57,6 +57,11 @@ def parse_args():
         nargs="?"
     )
 
+    parser.add_argument(
+        "--gif",
+        help="keep urself safe"
+    )
+
     if len(sys.argv) == 1:
         print(banner())
         parser.print_help()
@@ -100,6 +105,16 @@ def main(): # program main entry point
 
     if mode == MODE_BOING:
         image_paths = transform.boioioing(image_src)
+
+        # import imageio
+        # if args.gif == "a":
+        #     img = []
+        #     for i in range(0, len(image_paths)):
+
+        #         img.append(imageio.imread(image_paths[i]))
+
+        #     imageio.mimsave('wallahi.gif', img)
+
         while True:
             for i in range(0, len(image_paths), 8): # 8 is step :D
                 render.render_image(image_paths[i])
