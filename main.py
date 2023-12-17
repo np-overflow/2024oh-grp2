@@ -103,23 +103,27 @@ def main(): # program main entry point
     else:
         image_src = transform.resize_image(get_image(args.url, save_path+rng))
 
-    if mode == MODE_BOING:
-        image_paths = transform.boioioing(image_src)
+    match mode:
+        case "boioioing":
+            image_paths = transform.boioioing(image_src)
 
-        # import imageio
-        # if args.gif == "a":
-        #     img = []
-        #     for i in range(0, len(image_paths)):
+            while True:
+                for i in range(0, len(image_paths), 8): # 8 is step :D
+                    render.render_image(image_paths[i])
+                    time.sleep(1 / 727)
+                    os.system('cls') # clear terminal
 
-        #         img.append(imageio.imread(image_paths[i]))
+        case default:
+            print("not implemented")
 
-        #     imageio.mimsave('wallahi.gif', img)
+# import imageio
+# if args.gif == "a":
+#     img = []
+#     for i in range(0, len(image_paths)):
 
-        while True:
-            for i in range(0, len(image_paths), 8): # 8 is step :D
-                render.render_image(image_paths[i])
-                time.sleep(1 / 727)
-                os.system('cls') # clear terminal
+#         img.append(imageio.imread(image_paths[i]))
+
+#     imageio.mimsave('wallahi.gif', img)
 
 if __name__ == "__main__":
     main()
