@@ -1,5 +1,6 @@
 # imports
 import Render.render as render
+import Render.imagen as imagen
 import Transform.transform as transform
 
 import os
@@ -12,26 +13,12 @@ import requests
 
 from uuid import uuid4 as uuid
 
-# modes - add as needed
-MODE_BOING = "boioioing"
-MODE_DEBUG = "debug"
-MODE_TEST = "test"
 
 def banner():
     return """
-                                 __   _                    
-                                / _| | |                   
-   ___   __   __   ___   _ __  | |_  | |   ___   __      __
-  / _ \  \ \ / /  / _ \ | '__| |  _| | |  / _ \  \ \ /\ / /
- | (_) |  \ V /  |  __/ | |    | |   | | | (_) |  \ V  V / 
-  \___/    \_/    \___| |_|    |_|   |_|  \___/    \_/\_/                                                 
-
-Credits:
-    Yu Yang
-    Jayden
-    Alfred
-    Brayden
+    credit: yy
     """
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="boioioing")
@@ -53,8 +40,20 @@ def parse_args():
         "--mode",
         help="specifies what effects to apply to the input image, defaults to boioioing",
         default="boioioing",
-        choices=[MODE_BOING, MODE_DEBUG, MODE_TEST],
+        choices=["boioioing", "test", "debug"],
         nargs="?"
+    )
+
+    parser.add_argument(
+        "--generate",
+        help="generate an image with stable diffusion",
+        default="NO_GEN",
+        nargs="?"
+    )
+
+    parser.add_argument(
+        "--gif",
+        help="keep urself safe"
     )
 
     if len(sys.argv) == 1:
@@ -64,6 +63,7 @@ def parse_args():
 
     args = parser.parse_args()
     return args
+
 
 def get_image(url, save_path):
     response = requests.get(url)
@@ -81,6 +81,7 @@ def get_image(url, save_path):
 
     return new_path
 
+
 def main(): # program main entry point
     save_path = "./temp/"
 
@@ -92,20 +93,35 @@ def main(): # program main entry point
     rng = str(uuid())
 
     os.mkdir(save_path)
+    if args.generate != "NO_GEN":
+        args.path = imagen.generate(args.generate, save_path+rng)
 
     if args.path is not None:
         image_src = transform.resize_image(args.path)
     else:
         image_src = transform.resize_image(get_image(args.url, save_path+rng))
 
-    if mode == MODE_BOING:
-        image_paths = transform.boioioing(image_src)
-        while True:
-            for image in image_paths:
-                render.render_image(image)
+    match mode:
+        case "boioioing":
+            image_paths = transform.boioioing(image_src)
 
-                time.sleep(1 / 24 * 4)
-                os.system('cls') # clear terminal
+            while True:
+                for i in range(0, len(image_paths), 8): # 8 is step :D
+                    render.render_image(image_paths[i])
+                    time.sleep(1 / 727)
+                    os.system('cls') # clear terminal
+
+        case default:
+            print("not implemented")
+
+# import imageio
+# if args.gif == "a":
+#     img = []
+#     for i in range(0, len(image_paths)):
+
+#         img.append(imageio.imread(image_paths[i]))
+
+#     imageio.mimsave('wallahi.gif', img)
 
 if __name__ == "__main__":
     main()
