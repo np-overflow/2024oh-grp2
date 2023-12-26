@@ -1,8 +1,5 @@
 # 2024oh-grp2
-
-Team 1 (Image Processing) - Alfred/Brayden/Jayden
-
-Team 2 (everything else) - Yu Yang
+group ghost town
 
 todo: refer to [notion](https://www.notion.so/klystron/Open-House-2024-6595f8685e6348a497347a6179844c28)
 
