@@ -2,7 +2,7 @@ from diffusers import StableDiffusionPipeline
 from uuid import uuid4 as uuid
 import torch
 
-def generate(prompt, save_path):
+def _generate(prompt, save_path):
     EXT = ".jpg"
     rng = str(uuid())
 
@@ -16,3 +16,19 @@ def generate(prompt, save_path):
     image.save(f'{save_path}.{EXT}')
     
     return save_path + f".{EXT}"
+
+from openai import OpenAI
+import os
+
+def generate(prompt):
+    client = OpenAI(api_key="API KEY HERE")
+
+    response = client.images.generate(
+        model="dall-e-2",
+        prompt=prompt,
+        size="1024x1024",
+        quality="standard",
+        n=1
+    )
+
+    return response.data[0].url

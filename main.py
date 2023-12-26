@@ -40,7 +40,7 @@ def parse_args():
         "--mode",
         help="specifies what effects to apply to the input image, defaults to boioioing",
         default="boioioing",
-        choices=["boioioing", "test", "debug"],
+        choices=["boioioing", "static"],
         nargs="?"
     )
 
@@ -94,7 +94,10 @@ def main(): # program main entry point
 
     os.mkdir(save_path)
     if args.generate != "NO_GEN":
-        args.path = imagen.generate(args.generate, save_path+rng)
+        # with openai api
+        #args.url = imagen.generate(args.generate) 
+
+        args.path = imagen._generate(args.generate, save_path+rng)
 
     if args.path is not None:
         image_src = transform.resize_image(args.path)
@@ -110,6 +113,9 @@ def main(): # program main entry point
                     render.render_image(image_paths[i])
                     time.sleep(1 / 727)
                     os.system('cls') # clear terminal
+
+        case "static":
+            render.render_image(image_src)
 
         case default:
             print("not implemented")
