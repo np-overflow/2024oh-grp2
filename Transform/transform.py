@@ -112,7 +112,7 @@ def rotato(path):
     center = ((width + border_size) // 2, (height + border_size) // 2)
     
     rotated_images = []
-    for angle in range(0, 360):
+    for angle in range(0, 360, 3):
         rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0) # this creates a transformation matrix for rotation where argument center is the pivot
         
         # warpaffine essentially maps the rotated matrices' coordinates to the original's, read opencv docs for more info
@@ -142,7 +142,7 @@ def speen(path):
     img = cv2.copyMakeBorder(img, border_size // 2, border_size // 2, border_size // 2, border_size // 2, cv2.BORDER_CONSTANT, value=border_color)
 
     rotated_images = []
-    for angle in range(0, 360):
+    for angle in range(0, 360, 3):
         rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0) # this creates a transformation matrix for rotation where argument center is the pivot
         
         # warpaffine essentially maps the rotated matrices' coordinates to the original's, read opencv docs for more info
