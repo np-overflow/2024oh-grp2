@@ -40,7 +40,7 @@ def parse_args():
         "--mode",
         help="specifies what effects to apply to the input image, defaults to boioioing",
         default="boioioing",
-        choices=["boioioing", "static"],
+        choices=["boioioing", "static", "rotato", "speen"],
         nargs="?"
     )
 
@@ -94,7 +94,7 @@ def main(): # program main entry point
 
     os.mkdir(save_path)
     if args.generate != "NO_GEN":
-        # with openai api
+    #     # with openai api
         #args.url = imagen.generate(args.generate) 
 
         args.path = imagen._generate(args.generate, save_path+rng)
@@ -116,7 +116,23 @@ def main(): # program main entry point
 
         case "static":
             render.render_image(image_src)
+            
+        case "rotato":
+            image_paths = transform.rotato(image_src)
+            while True:
+                for i in range(0, len(image_paths), 9): # 9 is step :P
+                    render.render_image(image_paths[i])
+                    time.sleep(1/20) 
+                    os.system('cls')  # clear terminal
 
+        case "speen":
+            image_paths = transform.speen(image_src)
+            while True:
+                for i in range(0, len(image_paths), 9): # 9 is step XD
+                    render.render_image(image_paths[i])
+                    time.sleep(1/20) 
+                    os.system('cls')  # clear terminal
+                    
         case default:
             print("not implemented")
 
