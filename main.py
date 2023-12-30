@@ -111,7 +111,7 @@ def main(): # program main entry point
             while True:
                 for i in range(0, len(image_paths), 8): # 8 is step :D
                     render.render_image(image_paths[i])
-                    time.sleep(1 / 727)
+                    time.sleep(1 / 500)
                     os.system('cls') # clear terminal
 
         case "static":
