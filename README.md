@@ -2,6 +2,8 @@
 With animations! (using opencv)
 
 ## Getting started
+Ensure `Python` and `pip` are added to PATH.
+
 1. Clone this repository (`git clone https://github.com/np-overflow/2024oh-grp2.git && cd 2024oh-grp2`)
 2. Install the dependencies (`pip install -r requirements.txt`)
 3. Run `main.py` with desired arguments
