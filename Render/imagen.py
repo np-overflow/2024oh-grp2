@@ -6,7 +6,6 @@ import os
 
 def _generate(prompt, save_path):
     EXT = ".jpg"
-    rng = str(uuid())
 
     model_id = "dreamlike-art/dreamlike-photoreal-2.0"
 
@@ -20,7 +19,7 @@ def _generate(prompt, save_path):
     return save_path + f".{EXT}"
 
 def generate(prompt):
-    client = OpenAI(api_key="API KEY HERE")
+    client = OpenAI(api_key="API KEY HERE") 
 
     response = client.images.generate(
         model="dall-e-2",

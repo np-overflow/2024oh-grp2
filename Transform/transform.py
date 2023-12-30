@@ -4,8 +4,8 @@ def resize_image(path):
     img = cv2.imread(path)
     resized_img = cv2.resize(img, (1000, 1000))
 
-    alpha = 2 # kontras
-    beta = 0.5 # brigghtness
+    alpha = 2 # contrast
+    beta = 0.5 # brightness
 
     adjusted = cv2.convertScaleAbs(resized_img, alpha=alpha, beta=beta)
     cv2.imwrite(path, adjusted)
@@ -121,7 +121,7 @@ def rotato(path):
  
     paths = []
     for i, rotated_img in enumerate(rotated_images):
-        path = f"./temp/rotated_{i}.png"
+        path = f"./temp/rotate_{i}.png"
         cv2.imwrite(path, rotated_img) # saving image for debug purposes
         paths.append(path)
 
@@ -142,7 +142,7 @@ def speen(path):
     img = cv2.copyMakeBorder(img, border_size // 2, border_size // 2, border_size // 2, border_size // 2, cv2.BORDER_CONSTANT, value=border_color)
 
     rotated_images = []
-    for angle in range(0, 360, 3):
+    for angle in range(0, 360, 3): # doing in steps of 3 to improve performance
         rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0) # this creates a transformation matrix for rotation where argument center is the pivot
         
         # warpaffine essentially maps the rotated matrices' coordinates to the original's, read opencv docs for more info
@@ -151,7 +151,7 @@ def speen(path):
  
     paths = []
     for i, rotated_img in enumerate(rotated_images):
-        path = f"./temp/speen_{i}.png"
+        path = f"./temp/spin_{i}.png"
         cv2.imwrite(path, rotated_img) # saving image for debug purposes
         paths.append(path)
 

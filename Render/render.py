@@ -5,7 +5,8 @@ def render_image(path):
     frame = AsciiArt.from_image(path)
 
     frame.to_terminal()
-    #frame.to_terminal(monochrome=True)
+    # monochrome alternative 
+    #frame.to_terminal(monochrome=True) 
 
 def size_check(path):
     img = cv2.imread(path)
