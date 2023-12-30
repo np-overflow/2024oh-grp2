@@ -98,3 +98,61 @@ def boioioing(path): # expects 1000x1000 input
 
     return paths
     
+def rotato(path):
+    img = cv2.imread(path)
+
+    # get image dimensions
+    height, width = img.shape[:2]
+      
+    # creates a black border to handle cutoff when rotating images
+    # cv2.BORDER_CONSTANT adds a constant colored border i.e full solid colour (black in this case)
+    border_size = 400
+    border_color = [0, 0, 0] # black
+    img = cv2.copyMakeBorder(img, border_size // 2, border_size // 2, border_size // 2, border_size // 2, cv2.BORDER_CONSTANT, value=border_color)
+    center = ((width + border_size) // 2, (height + border_size) // 2)
+    
+    rotated_images = []
+    for angle in range(0, 360, 3):
+        rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0) # this creates a transformation matrix for rotation where argument center is the pivot
+        
+        # warpaffine essentially maps the rotated matrices' coordinates to the original's, read opencv docs for more info
+        rotated_img = cv2.warpAffine(img, rotation_matrix, (width + border_size, height + border_size)) 
+        rotated_images.append(rotated_img)
+ 
+    paths = []
+    for i, rotated_img in enumerate(rotated_images):
+        path = f"./temp/rotated_{i}.png"
+        cv2.imwrite(path, rotated_img) # saving image for debug purposes
+        paths.append(path)
+
+    return paths
+
+def speen(path):
+    img = cv2.imread(path)
+
+    # get image dimensions
+    height, width = img.shape[:2]
+    center = (width // 2, height // 2)
+    
+    border_size = 500
+    border_color = [0, 0, 0]
+    
+    # this does not create a border but just changes the pivot. it's quite funny
+    # this does something funny when border size is 500 btw
+    img = cv2.copyMakeBorder(img, border_size // 2, border_size // 2, border_size // 2, border_size // 2, cv2.BORDER_CONSTANT, value=border_color)
+
+    rotated_images = []
+    for angle in range(0, 360, 3):
+        rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0) # this creates a transformation matrix for rotation where argument center is the pivot
+        
+        # warpaffine essentially maps the rotated matrices' coordinates to the original's, read opencv docs for more info
+        rotated_img = cv2.warpAffine(img, rotation_matrix, (width + border_size, height + border_size))
+        rotated_images.append(rotated_img)
+ 
+    paths = []
+    for i, rotated_img in enumerate(rotated_images):
+        path = f"./temp/speen_{i}.png"
+        cv2.imwrite(path, rotated_img) # saving image for debug purposes
+        paths.append(path)
+
+    return paths
