@@ -1,6 +1,8 @@
 from diffusers import StableDiffusionPipeline
 from uuid import uuid4 as uuid
+from openai import OpenAI
 import torch
+import os
 
 def _generate(prompt, save_path):
     EXT = ".jpg"
@@ -16,9 +18,6 @@ def _generate(prompt, save_path):
     image.save(f'{save_path}.{EXT}')
     
     return save_path + f".{EXT}"
-
-from openai import OpenAI
-import os
 
 def generate(prompt):
     client = OpenAI(api_key="API KEY HERE")
