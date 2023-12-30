@@ -39,8 +39,8 @@ def parse_args():
         "-m",
         "--mode",
         help="specifies what effects to apply to the input image, defaults to boioioing",
-        default="boioioing",
-        choices=["boioioing", "static", "rotato", "speen"],
+        default="boing",
+        choices=["boing", "static", "rotate", "spin"],
         nargs="?"
     )
 
@@ -53,7 +53,7 @@ def parse_args():
 
     parser.add_argument(
         "--gif",
-        help="keep urself safe"
+        help="generate a gif (not implemented yet)"
     )
 
     if len(sys.argv) == 1:
@@ -105,11 +105,11 @@ def main(): # program main entry point
         image_src = transform.resize_image(get_image(args.url, save_path+rng))
 
     match mode:
-        case "boioioing":
+        case "boing":
             image_paths = transform.boioioing(image_src)
 
             while True:
-                for i in range(0, len(image_paths), 8): # 8 refers to the step
+                for i in range(len(image_paths)): 
                     render.render_image(image_paths[i])
                     time.sleep(1 / 500)
                     os.system('cls') # clear terminal
@@ -119,16 +119,18 @@ def main(): # program main entry point
             
         case "rotate":
             image_paths = transform.rotato(image_src)
+
             while True:
-                for i in range(0, len(image_paths), 8): 
+                for i in range(len(image_paths)): 
                     render.render_image(image_paths[i])
                     time.sleep(1 / 500) 
                     os.system('cls')  
 
         case "spin":
             image_paths = transform.speen(image_src)
+
             while True:
-                for i in range(0, len(image_paths), 8): 
+                for i in range(len(image_paths)): 
                     render.render_image(image_paths[i])
                     time.sleep(1 / 500) 
                     os.system('cls') 

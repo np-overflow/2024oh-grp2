@@ -1,15 +1,37 @@
-# 2024oh-grp2
-group ghost town
+# Image to ASCII art generator
+With animations! (using opencv)
 
-todo: refer to [notion](https://www.notion.so/klystron/Open-House-2024-6595f8685e6348a497347a6179844c28)
+## Getting started
+1. Clone this repository (`git clone https://github.com/np-overflow/2024oh-grp2.git && cd 2024oh-grp2`)
+2. Install the dependencies (`pip install -r requirements.txt`)
+3. Run `main.py` with desired arguments
 
-(P.S: Remember to `pip install -r requirements.txt` before trying to run anything, and make sure to update it if you use any imports)
+## How to use
+Arguments:
 
-## Workflow
+1. Local path (`-p OR --path [PATH]`)
 
-ENSURE CODE PASSES UNIT TESTS BEFORE PUSHING OR WRITE UNIT TESTS FOR THEM IF NOT APPLICABLE
+    Gets the image locally via file path.
 
-1. Save all changes
-2. `pip install pipreqs` if not already installed
-3. `pipreqs .` and remove `Render` and/or `Transform` if applicable
-4. Push to the right branch :\)
+2. URL (`-u OR --url [URL]`)
+
+    Get an image from the internet via URL.
+
+3. Mode (`-m OR --mode [MODE]`)
+
+    Chooses the type of transformation to apply to the passed image. Legal arguments are `boing || static || rotate || spin`. 
+
+    Boing will apply compressions and stretches to the x and y axes, creating a bouncy effect. 
+
+    Static will simply render the image in the terminal.
+
+    Rotate...
+
+    Spin... @jayden
+
+4. AI Generate (`--generate [PROMPT]`)
+
+    Generates an image with the provided prompt.
+
+Example use:
+    `python main.py -p C:/Users/user/Desktop/cat.png -m spin`
