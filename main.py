@@ -13,12 +13,10 @@ import requests
 
 from uuid import uuid4 as uuid
 
-
 def banner():
     return """
     credit: yy
     """
-
 
 def parse_args():
     parser = argparse.ArgumentParser(description="boioioing")
@@ -85,6 +83,18 @@ def get_image(url, save_path):
 def main(): # program main entry point
     save_path = "./temp/"
 
+    match sys.platform:
+        case "win32":
+            def clear_terminal():
+                os.system("cls")
+
+        case "linux" | "darwin": # darwin is macos
+            def clear_terminal():
+                os.system("clear")
+
+        case default:
+            raise ValueError("unknown os!")
+
     if os.path.exists(save_path):
         shutil.rmtree(save_path) # remove temp and its contents
 
@@ -112,7 +122,7 @@ def main(): # program main entry point
                 for i in range(len(image_paths)): 
                     render.render_image(image_paths[i])
                     time.sleep(1 / 500)
-                    os.system('cls') # clear terminal
+                    clear_terminal()
 
         case "static":
             render.render_image(image_src)
@@ -124,7 +134,7 @@ def main(): # program main entry point
                 for i in range(len(image_paths)): 
                     render.render_image(image_paths[i])
                     time.sleep(1 / 500) 
-                    os.system('cls')  
+                    clear_terminal()
 
         case "spin":
             image_paths = transform.speen(image_src)
@@ -133,7 +143,7 @@ def main(): # program main entry point
                 for i in range(len(image_paths)): 
                     render.render_image(image_paths[i])
                     time.sleep(1 / 500) 
-                    os.system('cls') 
+                    clear_terminal()
                     
         case default:
             print("not implemented")
