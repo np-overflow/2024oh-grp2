@@ -1,6 +1,6 @@
 ascii_magic==2.3.0
 diffusers==0.25.0
-numpy==1.26.2
+numpy==1.26.3
 openai==1.6.1
 opencv_contrib_python==4.9.0.80
 opencv_python==4.9.0.80
