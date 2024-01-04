@@ -83,17 +83,15 @@ def get_image(url, save_path):
 def main(): # program main entry point
     save_path = "./temp/"
 
-    match sys.platform:
-        case "win32":
-            def clear_terminal():
-                os.system("cls")
+    sysos = sys.platform
+    if sysos == "win32":
+        def clear_terminal():
+            os.system("cls")
 
-        case "linux" | "darwin": # darwin is macos
-            def clear_terminal():
-                os.system("clear")
+    if sysos == "linux" or sysos == "darwin": # darwin is macos
+        def clear_terminal():
+            os.system("clear")
 
-        case default:
-            raise ValueError("unknown os!")
 
     if os.path.exists(save_path):
         shutil.rmtree(save_path) # remove temp and its contents
@@ -114,39 +112,36 @@ def main(): # program main entry point
     else:
         image_src = transform.resize_image(get_image(args.url, save_path+rng))
 
-    match mode:
-        case "boing":
-            image_paths = transform.boioioing(image_src)
+    if mode == "boing":
+        image_paths = transform.boioioing(image_src)
 
-            while True:
-                for i in range(len(image_paths)): 
-                    render.render_image(image_paths[i])
-                    time.sleep(1 / 500)
-                    clear_terminal()
+        while True:
+            for i in range(len(image_paths)): 
+                render.render_image(image_paths[i])
+                time.sleep(1 / 500)
+                clear_terminal()
 
-        case "static":
-            render.render_image(image_src)
-            
-        case "rotate":
-            image_paths = transform.rotato(image_src)
+    if mode == "static":
+        render.render_image(image_src)
+        
+    if mode == "rotate":
+        image_paths = transform.rotato(image_src)
 
-            while True:
-                for i in range(len(image_paths)): 
-                    render.render_image(image_paths[i])
-                    time.sleep(1 / 500) 
-                    clear_terminal()
+        while True:
+            for i in range(len(image_paths)): 
+                render.render_image(image_paths[i])
+                time.sleep(1 / 500) 
+                clear_terminal()
 
-        case "spin":
-            image_paths = transform.speen(image_src)
+    if mode == "spin":
+        image_paths = transform.speen(image_src)
 
-            while True:
-                for i in range(len(image_paths)): 
-                    render.render_image(image_paths[i])
-                    time.sleep(1 / 500) 
-                    clear_terminal()
+        while True:
+            for i in range(len(image_paths)): 
+                render.render_image(image_paths[i])
+                time.sleep(1 / 500) 
+                clear_terminal()
                     
-        case default:
-            print("not implemented")
 
 # some code to export the result as a gif
 # import imageio
