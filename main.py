@@ -1,5 +1,6 @@
 # imports
 import Render.render as render
+import Render.cam as cam
 import Render.imagen as imagen
 import Transform.transform as transform
 
@@ -38,7 +39,7 @@ def parse_args():
         "--mode",
         help="specifies what effects to apply to the input image, defaults to boioioing",
         default="boing",
-        choices=["boing", "static", "rotate", "spin"],
+        choices=["boing", "static", "rotate", "spin", "stream"],
         nargs="?"
     )
 
@@ -53,6 +54,7 @@ def parse_args():
         "--gif",
         help="generate a gif (not implemented yet)"
     )
+
 
     if len(sys.argv) == 1:
         print(banner())
@@ -101,6 +103,14 @@ def main(): # program main entry point
     rng = str(uuid())
 
     os.mkdir(save_path)
+
+    if mode == "stream":
+        for img_path in cam.get_cam_input(save_path):
+            render.render_image(img_path)
+            time.sleep(1/ 50)
+            clear_terminal()
+            os.remove(img_path)
+
     if args.generate != "NO_GEN":
         # with openai api
         #args.url = imagen.generate(args.generate) 
@@ -112,13 +122,14 @@ def main(): # program main entry point
     else:
         image_src = transform.resize_image(get_image(args.url, save_path+rng))
 
+
     if mode == "boing":
         image_paths = transform.boioioing(image_src)
 
         while True:
             for i in range(len(image_paths)): 
                 render.render_image(image_paths[i])
-                time.sleep(1 / 500)
+                time.sleep(1 / 50)
                 clear_terminal()
 
     if mode == "static":
@@ -130,7 +141,7 @@ def main(): # program main entry point
         while True:
             for i in range(len(image_paths)): 
                 render.render_image(image_paths[i])
-                time.sleep(1 / 500) 
+                time.sleep(1 / 50) 
                 clear_terminal()
 
     if mode == "spin":
@@ -139,7 +150,7 @@ def main(): # program main entry point
         while True:
             for i in range(len(image_paths)): 
                 render.render_image(image_paths[i])
-                time.sleep(1 / 500) 
+                time.sleep(1 / 50) 
                 clear_terminal()
                     
 

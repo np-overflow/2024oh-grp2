@@ -5,7 +5,7 @@ def resize_image(path):
     resized_img = cv2.resize(img, (1000, 1000))
 
     alpha = 2 # contrast
-    beta = 0.5 # brightness
+    beta = 0 # brightness
 
     adjusted = cv2.convertScaleAbs(resized_img, alpha=alpha, beta=beta)
     cv2.imwrite(path, adjusted)
