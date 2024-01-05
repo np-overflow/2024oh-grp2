@@ -8,6 +8,11 @@ Ensure `Python` and `pip` are added to PATH.
 2. Install the dependencies (`pip install -r requirements.txt`)
 3. Run `main.py` with desired arguments
 
+## Setting up PyTorch with CUDA for image generation
+
+1. Go to [PyTorch's Get Started page](https://pytorch.org/get-started/locally/).
+2. Pick the right version for you and download it with the provided command.
+
 ## How to use
 Arguments:
 
