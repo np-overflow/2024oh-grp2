@@ -115,9 +115,9 @@ def main():  # program main entry point
         # args.url = imagen.generate(args.generate)
 
         # args.path = imagen._generate(args.generate, save_path+rng)
-        r = requests.post("http://localhost:5000/generate_image",
+        r = requests.post("https://imagetoascii.arashnrim.me/generate_image",
                           json={"prompt": args.generate})
-        args.url = f"http://localhost:5000/images/{r.text.split('/')[-1]}"
+        args.url = f"https://imagetoascii.arashnrim.me/images/{r.text.split('/')[-1]}"
 
     if args.path is not None:
         image_src = transform.resize_image(args.path)

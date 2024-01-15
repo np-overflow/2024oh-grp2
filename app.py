@@ -8,6 +8,11 @@ app = Flask(__name__)
 print(os.getcwd())
 
 
+@app.route("/")
+def index():
+    return "Hello, World!"
+
+
 @app.route("/generate_image", methods=["POST"])
 def generate_image():
     body = request.get_json()
