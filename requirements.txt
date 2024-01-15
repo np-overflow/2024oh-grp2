@@ -4,4 +4,6 @@ numpy==1.26.3
 openai==1.7.2
 opencv_contrib_python==4.9.0.80
 opencv_python==4.9.0.80
-torch==2.1.2+cu121
+torch==2.1.2
+transformers
+accelerate

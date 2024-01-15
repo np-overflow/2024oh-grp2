@@ -4,22 +4,24 @@ from openai import OpenAI
 import torch
 import os
 
+model_id = "dreamlike-art/dreamlike-photoreal-2.0"
+pipe = StableDiffusionPipeline.from_pretrained(
+    model_id, torch_dtype=torch.float16)
+pipe = pipe.to("cuda")
+
+
 def _generate(prompt, save_path):
-    EXT = ".jpg"
-
-    model_id = "dreamlike-art/dreamlike-photoreal-2.0"
-
-    pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
-    pipe = pipe.to("cuda")
+    EXT = "jpg"
 
     image = pipe(prompt).images[0]
 
     image.save(f'{save_path}.{EXT}')
-    
+
     return save_path + f".{EXT}"
 
+
 def generate(prompt):
-    client = OpenAI(api_key="API KEY HERE") 
+    client = OpenAI(api_key="API KEY HERE")
 
     response = client.images.generate(
         model="dall-e-2",

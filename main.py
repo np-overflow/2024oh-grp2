@@ -1,7 +1,6 @@
 # imports
 import Render.render as render
 import Render.cam as cam
-import Render.imagen as imagen
 import Transform.transform as transform
 
 import os
@@ -14,10 +13,12 @@ import requests
 
 from uuid import uuid4 as uuid
 
+
 def banner():
     return """
     credit: yy
     """
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="boioioing")
@@ -55,7 +56,6 @@ def parse_args():
         help="generate a gif (not implemented yet)"
     )
 
-
     if len(sys.argv) == 1:
         print(banner())
         parser.print_help()
@@ -69,9 +69,9 @@ def get_image(url, save_path):
     response = requests.get(url)
 
     if response.status_code == 200:
-        with open(save_path, 'wb') as file_handle: # 'wb' - write mode for binary files
+        with open(save_path, 'wb') as file_handle:  # 'wb' - write mode for binary files
             file_handle.write(response.content)
-        
+
         image_format = imghdr.what(save_path)
         new_path = f"{save_path}.{image_format}"
 
@@ -82,7 +82,7 @@ def get_image(url, save_path):
     return new_path
 
 
-def main(): # program main entry point
+def main():  # program main entry point
     save_path = "./temp/"
 
     sysos = sys.platform
@@ -90,13 +90,12 @@ def main(): # program main entry point
         def clear_terminal():
             os.system("cls")
 
-    if sysos == "linux" or sysos == "darwin": # darwin is macos
+    if sysos == "linux" or sysos == "darwin":  # darwin is macos
         def clear_terminal():
             os.system("clear")
 
-
     if os.path.exists(save_path):
-        shutil.rmtree(save_path) # remove temp and its contents
+        shutil.rmtree(save_path)  # remove temp and its contents
 
     args = parse_args()
     mode = args.mode
@@ -107,52 +106,54 @@ def main(): # program main entry point
     if mode == "stream":
         for img_path in cam.get_cam_input(save_path):
             render.render_image(img_path)
-            time.sleep(1/ 50)
+            time.sleep(1 / 50)
             clear_terminal()
             os.remove(img_path)
 
     if args.generate != "NO_GEN":
         # with openai api
-        #args.url = imagen.generate(args.generate) 
+        # args.url = imagen.generate(args.generate)
 
-        args.path = imagen._generate(args.generate, save_path+rng)
+        # args.path = imagen._generate(args.generate, save_path+rng)
+        r = requests.post("http://localhost:5000/generate_image",
+                          json={"prompt": args.generate})
+        args.url = f"http://localhost:5000/images/{r.text.split('/')[-1]}"
 
     if args.path is not None:
         image_src = transform.resize_image(args.path)
     else:
         image_src = transform.resize_image(get_image(args.url, save_path+rng))
 
-
     if mode == "boing":
         image_paths = transform.boioioing(image_src)
 
         while True:
-            for i in range(len(image_paths)): 
+            for i in range(len(image_paths)):
                 render.render_image(image_paths[i])
                 time.sleep(1 / 50)
                 clear_terminal()
 
     if mode == "static":
         render.render_image(image_src)
-        
+
     if mode == "rotate":
         image_paths = transform.rotato(image_src)
 
         while True:
-            for i in range(len(image_paths)): 
+            for i in range(len(image_paths)):
                 render.render_image(image_paths[i])
-                time.sleep(1 / 50) 
+                time.sleep(1 / 50)
                 clear_terminal()
 
     if mode == "spin":
         image_paths = transform.speen(image_src)
 
         while True:
-            for i in range(len(image_paths)): 
+            for i in range(len(image_paths)):
                 render.render_image(image_paths[i])
-                time.sleep(1 / 50) 
+                time.sleep(1 / 50)
                 clear_terminal()
-                    
+
 
 # some code to export the result as a gif
 # import imageio
