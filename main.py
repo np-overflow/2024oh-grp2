@@ -106,6 +106,7 @@ def main(): # program main entry point
 
     if mode == "stream":
         for img_path in cam.get_cam_input(save_path):
+            transform.resize_image(img_path)
             render.render_image(img_path)
             time.sleep(1/ 50)
             clear_terminal()

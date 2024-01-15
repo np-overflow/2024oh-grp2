@@ -1,7 +1,7 @@
-ascii_magic==2.3.0
-diffusers==0.25.0
-numpy==1.26.3
-openai==1.7.2
-opencv_contrib_python==4.9.0.80
-opencv_python==4.9.0.80
-torch==2.1.2+cu121
+ascii_magic
+diffusers
+numpy
+openai
+opencv_contrib_python
+opencv_python
+torch
